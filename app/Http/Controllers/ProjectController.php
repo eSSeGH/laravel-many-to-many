@@ -129,6 +129,7 @@ class ProjectController extends Controller
 
         $data['slug'] = Str::slug( $data['title'] );
 
+        // sincronizzo le tecnologie che ci arrivano dalla richiesta con uelle del project, altrimenti (se deselezionate) faccio in modo di cancellarle
         if (isset($data['technologies'])) {
             $project->technologies()->sync($data['technologies']);
         } else {

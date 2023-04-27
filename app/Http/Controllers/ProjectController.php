@@ -129,7 +129,13 @@ class ProjectController extends Controller
 
         $data['slug'] = Str::slug( $data['title'] );
 
-        $project->update();
+        if (isset($data['technologies'])) {
+            $project->technologies()->sync($data['technologies']);
+        } else {
+            $project->technologies()->sync([]);
+        }
+
+        $project->update($data);
 
         return to_route('projects.show', $project);
     }

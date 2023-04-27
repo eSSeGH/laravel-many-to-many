@@ -29,7 +29,9 @@ class StoreProjectRequest extends FormRequest
             'title' => 'required|max:150|unique:projects,title',
             'description' => 'nullable|string',
             'client_name' => 'required|regex:/Sig\.r?a? [A-Z][.]*/',
-            'client_tel' => 'required|regex:/3[34][0-9]{8}/'
+            'client_tel' => 'required|regex:/3[34][0-9]{8}/',
+            'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ];
     }
 }

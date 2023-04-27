@@ -37,9 +37,16 @@
                         <a href="{{ route('projects.show', $project['slug']) }}">Vai al progetto</a>
                     </td>
 
-                    {{-- laravel ci permette di utilizare il metodo definito nel modo come se fosse un attributo --}}
+                    {{-- laravel ci permette di utilizare il metodo definito nel model come se fosse un attributo --}}
                     <td>{{ $project->type ? $project->type->name : '-'}}</td>
 
+                    <td>
+                        @forelse ($project->technologies as $technology)
+                            <span>{{ $technology->name }}</span>
+                        @empty
+                            -
+                        @endforelse
+                    </td>
 
                     <td>{{ $project->description }}</td>                     
                     <td>{{ $project->client_name }}</td>

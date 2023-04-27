@@ -15,7 +15,14 @@
                     <span class="badge rounded-pill bg-warning">nessuna categoria</span>
                 @endif
             </h2>
-            
+
+            <h4 class="card-text">Tecnologie: 
+                @forelse ($project->technologies as $technology)
+                    <span style="font-size: 0.8rem;">{{ $technology->name }}</span>
+                @empty
+                    -
+                @endforelse
+            </h4>
             <h4 class="card-text">Descrizione: 
                 <p style="font-size: 0.8rem;">{{ $project['description']}}</p>
             </h4>

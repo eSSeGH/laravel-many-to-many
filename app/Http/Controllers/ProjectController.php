@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateProjectRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -41,8 +42,9 @@ class ProjectController extends Controller
         $num_of_trashed = Project::onlyTrashed()->count();
 
         $types = Type::orderBy('name', 'asc')->get();
+        $technologies = Technology::orderBy('name', 'asc')->get();
 
-        return view('projects.create', compact('num_of_trashed', 'types'));
+        return view('projects.create', compact('num_of_trashed', 'types', 'technologies'));
     }
 
     /**
@@ -58,6 +60,10 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug( $data['title'] );
 
         $project = Project::create($data);
+
+        if (isset($data['technologies'])) {
+            $project->technologies()->attach($data['technologies']);
+        }
 
         return to_route('projects.show', $project);
     }
@@ -105,8 +111,9 @@ class ProjectController extends Controller
         $num_of_trashed = Project::onlyTrashed()->count();
 
         $types = Type::orderBy('name', 'asc')->get();
+        $technologies = Technology::orderBy('name', 'asc')->get();
 
-        return view('projects.edit', compact('project', 'num_of_trashed', 'types'));
+        return view('projects.edit', compact('project', 'num_of_trashed', 'types', 'technologies'));
     }
 
     /**

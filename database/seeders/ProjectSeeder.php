@@ -36,6 +36,7 @@ class ProjectSeeder extends Seeder
             $project->save();
 
             // peschiamo ualche technologies in maniera random e assegniamola ad un project creato di volta in volta
+            // attach scrive le righe della tabella ponte, gli servono gli id di entrambe le tabelle e per uesto va dopo il save
             $project->technologies()->attach($faker->randomElements($technology_ids, rand(0,5)));
         }
     }

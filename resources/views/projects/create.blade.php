@@ -42,6 +42,26 @@
                     </div>
 
                     <div class="mb-3">
+                        <label for="technologies" class="form-label">Tecnologie:</label>
+                        <div class="d-flex gap-3 flex-wrap @error('technologies') is-invalid @enderror">
+                            @foreach($technologies as $key => $technology)
+                                <div class="form-check">
+                                    <input name="technologies[]" @checked( in_array( $technology->id, old('technologies', [] ) ) ) class="form-check-input" type="checkbox" value="{{ $technology->id }}" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ $technology->name }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        
+                        @error('technologies')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="mb-3">
                         <label for="description" class="form-label">Descrizione:</label>
                         <textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description" id="description">
                             {{ old('description') }}
